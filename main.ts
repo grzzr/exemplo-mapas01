@@ -1,3 +1,8 @@
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
+        mySprite.vy += -200
+    }
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, function (sprite, location) {
     tiles.setTileAt(location, sprites.dungeon.darkGroundCenter)
     info.changeScoreBy(1)
@@ -9,8 +14,9 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, fu
     tiles.setTileAt(location, sprites.dungeon.darkGroundCenter)
     info.changeLifeBy(1)
 })
+let mySprite: Sprite = null
 tiles.setCurrentTilemap(tilemap`level2`)
-let mySprite = sprites.create(img`
+mySprite = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
     . . . f f f 2 2 2 2 f f f . . . 
@@ -28,5 +34,6 @@ let mySprite = sprites.create(img`
     . . . . . f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
+mySprite.ay = 200
 scene.cameraFollowSprite(mySprite)
-controller.moveSprite(mySprite)
+controller.moveSprite(mySprite, 100, 0)
