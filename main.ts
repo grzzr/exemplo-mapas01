@@ -1,4 +1,6 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    // Pular é mudar a velocidade do personagem no eixo y.
+    // A condição (if sprite hitting wall) serve para permitir que o personagem pule apenas SE ele estiver enconstando em um muro e se a parte dele encostada no muro for a parte de baixo. Ou seja, se o personagem estiver no chão.
     if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
         mySprite.vy += -200
     }
@@ -34,6 +36,7 @@ mySprite = sprites.create(img`
     . . . . . f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
-mySprite.ay = 200
+mySprite.ay = 500
 scene.cameraFollowSprite(mySprite)
+// vy=0 para que o personagem não mova-se para cima e para baixo com as setas, apenas pulando.
 controller.moveSprite(mySprite, 100, 0)
